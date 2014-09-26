@@ -6,9 +6,10 @@ function BufferedSink(opts){
 }
 
 BufferedSink.prototype.flush = function(cb){
+    var self = this;
     this.writeItems(this.cache, function(err){
         if(err){ return cb(err); }
-        this.cache = [];
+        self.cache = [];
         return cb.apply(null, [].slice.call( arguments ) );
     });
 };
