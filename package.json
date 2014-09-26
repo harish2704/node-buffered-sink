@@ -1,0 +1,23 @@
+{
+  "name": "buffered-sink",
+  "version": "0.0.1",
+  "description": "A general purpose buffer class that can buffer custom objects need to be sent to a sink.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha -R spec test/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harish2704/node-buffered-sink"
+  },
+  "keywords": [
+  ],
+  "author": {
+    "name": "Harish.K",
+    "email": "harish2704@gmail.com"
+  },
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/harish2704/node-buffered-sink"
+  }
+}
