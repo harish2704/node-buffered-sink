@@ -19,7 +19,23 @@ BufferedSink.prototype.flush = function(cb){
     });
 };
 
-BufferedSink.prototype.write = function(item, cb) {
+BufferedSink.prototype.$writeArray = function(items, cb) {
+    if ( this.isWriting ){
+        this.tempCache = this.tempCache.concat( items );
+        cb( null );
+    } else {
+        this.cache = this.cache.concat( items );
+        if ( this.cache.length < this.maxSize ){
+            return cb( null );
+        }
+        this.flush( function(err){
+            if(err) { return cb(err); }
+            return cb( null );
+        });
+    }
+};
+
+BufferedSink.prototype.$write = function(item, cb) {
     if ( this.isWriting ){
         this.tempCache.push( item );
         cb( null );
@@ -33,6 +49,13 @@ BufferedSink.prototype.write = function(item, cb) {
             return cb( null );
         });
     }
+};
+
+BufferedSink.prototype.write = function(data, cb) {
+    if( data.constructor.name === 'Array' ){
+        return this.$writeArray( data, cb );
+    }
+    this.$write( data, cb );
 };
 
 module.exports = BufferedSink;
