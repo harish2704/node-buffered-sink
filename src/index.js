@@ -2,8 +2,8 @@
 function BufferedSink(opts){
     this.maxSize = opts.maxSize || 10;
     this.writeItems = opts.writeItems;
-    this.cache = [];
-    this.tempCache = [];
+    this.cache = []; // Items are stored here until cache.length reaches maxSize.
+    this.tempCache = []; // This is used store items while real writing taking place.
     this.isWriting = false;
 }
 
